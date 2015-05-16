@@ -18,6 +18,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -67,6 +69,7 @@ public class Avaleht extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
+        mängiMuusikat();
     }
 
 	
@@ -185,7 +188,15 @@ public class Avaleht extends Application {
 	        getChildren().addAll(bg, menu0);
 	    }
 	}
-
+	
+	private void mängiMuusikat() {
+		String fail = "file:///C:/Users/Oliver/gitR%C3%BChmat%C3%B6%C3%B62/R%C3%BChmat%C3%B6%C3%B6%202/teemalaul.mp3";
+		Media laul = new Media(fail);
+		MediaPlayer mediaPlayer = new MediaPlayer(laul);
+		mediaPlayer.setVolume(0.1);
+		mediaPlayer.play();
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
