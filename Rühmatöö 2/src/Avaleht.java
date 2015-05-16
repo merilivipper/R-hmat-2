@@ -188,11 +188,11 @@ public class Avaleht extends Application {
 	        getChildren().addAll(bg, menu0);
 	    }
 	}
-	
+	private MediaPlayer mediaPlayer;
 	private void mängiMuusikat() {
 		String fail = "file:///C:/Users/Oliver/gitR%C3%BChmat%C3%B6%C3%B62/R%C3%BChmat%C3%B6%C3%B6%202/teemalaul.mp3";
 		Media laul = new Media(fail);
-		MediaPlayer mediaPlayer = new MediaPlayer(laul);
+		mediaPlayer = new MediaPlayer(laul);
 		mediaPlayer.setVolume(0.1);
 		mediaPlayer.play();
 	}
