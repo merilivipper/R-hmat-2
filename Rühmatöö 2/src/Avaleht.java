@@ -42,10 +42,11 @@ public class Avaleht extends Application {
         imgView.setFitHeight(440);
 
         Menu gameMenu = new Menu();
-        gameMenu.setVisible(false);
+        gameMenu.setVisible(true);
 
         root.getChildren().addAll(imgView, gameMenu);
-
+        
+        //Siit eemaldada fade efekt, või täiustada.
         Scene scene = new Scene(root);
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
@@ -114,30 +115,30 @@ public class Avaleht extends Application {
 		    VBox menu0 = new VBox(10);
 	        VBox menu1 = new VBox(10);
 	
-	        menu0.setTranslateX(100);
-	        menu0.setTranslateY(200);
-	        menu1.setTranslateX(100);
-	        menu1.setTranslateY(200);
+	        menu0.setTranslateX(80);
+	        menu0.setTranslateY(140);
+	        menu1.setTranslateX(80);
+	        menu1.setTranslateY(188);
 	        
-	        //////////
 	        final int offset = 400;
 	
 	        menu1.setTranslateX(offset);
-	
-	        MenuButton btnResume = new MenuButton("RESUME");
-	        btnResume.setOnMouseClicked(event -> {
+	        
+
+	        MenuButton btnAlusta = new MenuButton("ALUSTA");
+	        btnAlusta.setOnMouseClicked(event -> {
 	            FadeTransition ft = new FadeTransition(Duration.seconds(0.5), this);
 	            ft.setFromValue(1);
 	            ft.setToValue(0);
 	            ft.setOnFinished(evt -> setVisible(false));
 	            ft.play();
 	        });
-	
-	
-	        MenuButton btnOptions = new MenuButton("OPTIONS");
-	        btnOptions.setOnMouseClicked(event -> {
-	            getChildren().add(menu1);
-	
+	        
+	        MenuButton btnJuhised = new MenuButton("JUHISED");
+	        btnJuhised.setOnMouseClicked(event -> {
+	        	//Lisada paremale juhised
+	        	getChildren().add(menu1);
+
 	            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu0);
 	            tt.setToX(menu0.getTranslateX() - offset);
 	
@@ -152,40 +153,35 @@ public class Avaleht extends Application {
 	            });
 	        });
 	
-	        MenuButton btnExit = new MenuButton("EXIT");
-	        btnExit.setOnMouseClicked(event -> {
+
+	        MenuButton btnVälju = new MenuButton("VÄLJU");
+	        btnVälju.setOnMouseClicked(event -> {
 	            System.exit(0);
 	        });
 	
-	        MenuButton btnBack = new MenuButton("BACK");
-	        btnBack.setOnMouseClicked(event -> {
-	            getChildren().add(menu0);
-	
-	            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
-	            tt.setToX(menu1.getTranslateX() + offset);
-	
-	            TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.5), menu0);
-	            tt1.setToX(menu1.getTranslateX());
-	
+	        MenuButton btnTagasi = new MenuButton("TAGASI");
+	        btnTagasi.setOnMouseClicked(event -> {
+                getChildren().add(menu0);
+
+                TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
+                tt.setToX(menu1.getTranslateX() + offset);
+
+                TranslateTransition tt1 = new TranslateTransition(Duration.seconds(0.25), menu0);
+                tt1.setToX(menu1.getTranslateX());
+
 	            tt.play();
-	            tt1.play();
-	
-	            tt.setOnFinished(evt -> {
-	                getChildren().remove(menu1);
-	            });
+                tt1.play();
+
+                tt1.setOnFinished(evt -> {
+                    getChildren().remove(menu1);
+                });
 	        });
 	
-	        MenuButton btnSound = new MenuButton("SOUND");
-	        MenuButton btnVideo = new MenuButton("VIDEO");
 	
-	        menu0.getChildren().addAll(btnResume, btnOptions, btnExit);
-	        menu1.getChildren().addAll(btnBack, btnSound, btnVideo);
+	        menu0.getChildren().addAll(btnAlusta, btnJuhised, btnVälju);
+	        menu1.getChildren().addAll(btnTagasi);
 	
-	        Rectangle bg = new Rectangle(820, 440);
-	        bg.setFill(Color.GREY);
-	        bg.setOpacity(0);
-	
-	        getChildren().addAll(bg, menu0);
+	        getChildren().add(menu0);
 	    }
 	}
 	private MediaPlayer mediaPlayer;
