@@ -22,6 +22,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.util.Duration;
@@ -124,7 +125,21 @@ public class Avaleht extends Application {
 	
 	        menu1.setTranslateX(offset);
 	        
-
+	        // kast ja tekst juhiste jaoks
+    		Rectangle bg = new Rectangle(500, 185, Color.BLACK);
+    		bg.setLayoutX(200); 
+    		bg.setLayoutY(100); 
+    		bg.setOpacity(0.85);
+    		
+        	Text juhised = new Text(210, 130, "Mängu töö põhimõte on sama nagu originaalil: \nMängijalt küsitakse kuni 15 küsimust ja antakse"
+        			+ "\niga küsimuse juures 4 vastusevarianti. Mängija\n"
+        			+ "peab arvama milline neist variantidest on õige.\n"
+        			+ "Vastuse ära arvamisel on abiks 3 õlekõrt: \n"
+        			+ "'publiku abi', 'kõne sõbrale' ja '50 50'.");
+    		juhised.setFill(Color.WHITE);
+    		juhised.setFont(Font.font(java.awt.Font.SERIF, 25));
+	        
+    		// nupud
 	        MenuButton btnAlusta = new MenuButton("ALUSTA");
 	        btnAlusta.setOnMouseClicked(event -> {
 	            FadeTransition ft = new FadeTransition(Duration.seconds(0.5), this);
@@ -137,7 +152,7 @@ public class Avaleht extends Application {
 	        MenuButton btnJuhised = new MenuButton("JUHISED");
 	        btnJuhised.setOnMouseClicked(event -> {
 	        	//Lisada paremale juhised
-	        	getChildren().add(menu1);
+	        	getChildren().addAll(menu1, bg, juhised);
 
 	            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu0);
 	            tt.setToX(menu0.getTranslateX() - offset);
@@ -151,6 +166,7 @@ public class Avaleht extends Application {
 	            tt.setOnFinished(evt -> {
 	                getChildren().remove(menu0);
 	            });
+	            
 	        });
 	
 
@@ -162,6 +178,7 @@ public class Avaleht extends Application {
 	        MenuButton btnTagasi = new MenuButton("TAGASI");
 	        btnTagasi.setOnMouseClicked(event -> {
                 getChildren().add(menu0);
+                getChildren().removeAll(bg, juhised);
 
                 TranslateTransition tt = new TranslateTransition(Duration.seconds(0.25), menu1);
                 tt.setToX(menu1.getTranslateX() + offset);
@@ -186,7 +203,7 @@ public class Avaleht extends Application {
 	}
 	private MediaPlayer mediaPlayer;
 	private void mängiMuusikat() {
-		String fail = "file:///C:/Users/Oliver/gitR%C3%BChmat%C3%B6%C3%B62/R%C3%BChmat%C3%B6%C3%B6%202/teemalaul.mp3";
+		String fail = "file:///C:/Users/Merili/git/OOPRyhmatoo2/R%C3%BChmat%C3%B6%C3%B6%202/teemalaul.mp3";
 		Media laul = new Media(fail);
 		mediaPlayer = new MediaPlayer(laul);
 		mediaPlayer.setVolume(0.1);
